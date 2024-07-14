@@ -38,6 +38,18 @@ def main():
         # Print success message
         print(f"Successfully loaded and processed the webpage: {url}")
 
+        # Question-answering loop
+        while True:
+            # Get user question
+            question = input("Enter your question (or 'q' to quit): ")
+            
+            if question.lower() == 'q':
+                break
+
+            # Get answer
+            response = qa_chain.invoke({"input": question})
+            print(f"Answer: {response['answer']}")
+
         # Ask if user wants to continue
         continue_input = input("Do you want to load another webpage? (y/n) ")
         if continue_input.lower() != "y":
