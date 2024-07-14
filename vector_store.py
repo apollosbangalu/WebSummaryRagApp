@@ -5,5 +5,6 @@ def create_vector_store(splits):
     """
     Create a vector store from the text splits.
     """
-    # Implement vector store creation using Chroma and OpenAIEmbeddings
-    pass
+    embeddings = OpenAIEmbeddings()
+    vector_store = Chroma.from_documents(splits, embeddings)
+    return vector_store

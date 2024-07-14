@@ -23,9 +23,20 @@ def main():
         # Load webpage
         document = load_webpage(url)
 
-        # Print the contents of the page
-        print("Webpage contents:")
-        print(document.page_content)
+        # Split the document into chunks
+        splits = split_text(document)
+
+        # Create vector store
+        vector_store = create_vector_store(splits)
+
+        # Get retriever
+        retriever = get_retriever(vector_store)
+
+        # Create QA chain
+        qa_chain = create_qa_chain(retriever)
+
+        # Print success message
+        print(f"Successfully loaded and processed the webpage: {url}")
 
         # Ask if user wants to continue
         continue_input = input("Do you want to load another webpage? (y/n) ")
