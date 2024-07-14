@@ -15,13 +15,43 @@ api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
     raise ValueError("OPENAI_API_KEY not found in environment variables")
 
-st.title("Webpage Q&A App")
+# Set page config
+st.set_page_config(page_title="Webpage Q&A App", page_icon="🌐", layout="wide")
+
+# Custom CSS
+st.markdown("""
+<style>
+    .stButton>button {
+        color: #ffffff;
+        background-color: #4B0082;
+        border-radius: 20px;
+        border: 2px solid #8A2BE2;
+        padding: 10px 24px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    .stButton>button:hover {
+        background-color: #8A2BE2;
+        border-color: #4B0082;
+    }
+    .stTextInput>div>div>input {
+        border-radius: 20px;
+        border: 2px solid #4169E1;
+    }
+    .stAlert {
+        border-radius: 20px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Title with custom styling
+st.markdown("<h1 style='text-align: center; color: #4B0082;'>🌐 Webpage Q&A App</h1>", unsafe_allow_html=True)
 
 # Input for webpage URL
-url = st.text_input("Enter the URL of the webpage:")
+url = st.text_input("🔗 Enter the URL of the webpage:", key="url_input")
 
 if url:
-    with st.spinner("Loading and processing the webpage..."):
+    with st.spinner("🔍 Loading and processing the webpage..."):
         # Load webpage
         document = load_webpage(url)
 
@@ -37,13 +67,21 @@ if url:
         # Create QA chain
         qa_chain = create_qa_chain(retriever)
 
-    st.success(f"Successfully loaded and processed the webpage: {url}")
+    st.success(f"✅ Successfully loaded and processed the webpage: {url}")
 
     # Question input
-    question = st.text_input("Enter your question:")
+    question = st.text_input("❓ Enter your question:", key="question_input")
 
     if question:
-        with st.spinner("Generating answer..."):
-            # Get answer
-            response = qa_chain.invoke({"input": question})
-            st.write(f"Answer: {response['answer']}")
+        if st.button("🔮 Get Answer", key="answer_button"):
+            with st.spinner("🧠 Generating answer..."):
+                # Get answer
+                response = qa_chain.invoke({"input": question})
+                st.markdown(f"**Answer:** {response['answer']}")
+
+# Add a footer
+st.markdown("""
+<div style='position: fixed; bottom: 0; left: 0; right: 0; background-color: #4B0082; color: white; text-align: center; padding: 10px;'>
+    Made with ❤️ and Streamlit
+</div>
+""", unsafe_allow_html=True)
