@@ -47,6 +47,15 @@ st.markdown("""
 # Title with custom styling
 st.markdown("<h1 style='text-align: center; color: #4B0082;'>🌐 Webpage Q&A App</h1>", unsafe_allow_html=True)
 
+# App summary
+st.markdown("""
+### How to use this app:
+1. Enter the URL of a webpage you want to ask questions about.
+2. Wait for the app to process the webpage.
+3. Once processed, enter your question about the webpage content.
+4. Click the 'Get Answer' button to receive an AI-generated answer based on the webpage content.
+""")
+
 # Input for webpage URL
 url = st.text_input("🔗 Enter the URL of the webpage:", key="url_input")
 
