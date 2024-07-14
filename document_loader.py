@@ -4,5 +4,6 @@ def load_webpage(url):
     """
     Load a webpage and return the document.
     """
-    # Implement webpage loading using WebBaseLoader
-    pass
+    loader = WebBaseLoader(web_paths=[url])
+    documents = loader.load()
+    return documents[0]

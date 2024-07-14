@@ -18,16 +18,19 @@ def main():
     # Main application loop
     while True:
         # Get webpage URL from user
+        url = input("Enter the URL of the webpage: ")
+
         # Load webpage
-        # Split text
-        # Create vector store
-        # Get retriever
-        # Create QA chain
-        # Get user question
-        # Get answer
-        # Print answer
+        document = load_webpage(url)
+
+        # Print the contents of the page
+        print("Webpage contents:")
+        print(document.page_content)
+
         # Ask if user wants to continue
-        pass
+        continue_input = input("Do you want to load another webpage? (y/n) ")
+        if continue_input.lower() != "y":
+            break
 
 if __name__ == "__main__":
     main()
