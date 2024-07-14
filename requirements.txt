@@ -4,3 +4,4 @@ langchain_community>=0.0.20,<0.1.0
 python-dotenv==1.0.1
 chromadb==0.4.22
 beautifulsoup4==4.12.2
+streamlit==1.32.0
